@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "Tema de la semana",
+  "short_name": "Tema semanal",
+  "description": "Un tema nuevo cada semana, con conceptos clave, plan de estudio y preguntas.",
+  "lang": "es",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ecebf4",
+  "theme_color": "#4a3fd0",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
