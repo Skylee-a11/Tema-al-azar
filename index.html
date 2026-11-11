@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tema de la semana</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#4a3fd0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Tema de la semana">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600&family=Unbounded:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ecebf4;--ink:#181533;--mut:#5b5878;--card:#fff;--line:#d3d0e4;--acc:#4a3fd0;--on:#fff;--ok:#1f8a5b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12102a;--ink:#ecebff;--mut:#a6a3c9;--card:#1b1940;--line:#353163;--acc:#9d93ff;--on:#12102a;--ok:#5cc58a}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Instrument Sans",system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;color:var(--mut)}
+button,.btn{font:inherit;color:inherit;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);cursor:pointer;text-decoration:none;display:inline-block}
+button:focus-visible,.btn:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.hero{background:var(--acc);color:var(--on);border-radius:22px;padding:28px 24px;margin:14px 0}
+.hero .ar{font-weight:600;opacity:.85}
+h1{font:600 clamp(28px,7vw,50px)/1.1 Unbounded,"Arial Black",sans-serif;margin:8px 0 12px;overflow-wrap:anywhere;min-height:1.1em}
+.hero p{margin:0 0 16px;font-size:19px;max-width:48ch}
+.meter{height:10px;border-radius:5px;background:rgba(255,255,255,.3);overflow:hidden}.meter i{display:block;height:100%;width:0;background:var(--on);transition:width .3s}
+#pt{margin:6px 0 14px;font-size:15px}
+.acts{display:flex;gap:8px;flex-wrap:wrap}.hero .btn,.hero button{background:transparent;color:var(--on);border-color:var(--on)}
+h2{font:600 20px Unbounded,sans-serif;margin:30px 0 10px}
+.cc{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;cursor:pointer}
+.cc input{width:22px;height:22px;margin-top:3px;accent-color:var(--acc);flex:none}
+.cc:has(input:checked){border-color:var(--ok)}.cc:has(input:checked) b{color:var(--ok)}
+ol{padding-left:0;list-style:none;margin:0}ol li{padding:10px 0;border-bottom:1px solid var(--line)}ol b{display:inline-block;min-width:96px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+#qq{font-weight:600;font-size:20px;margin-bottom:8px}#qa{margin:8px 0;color:var(--ok);font-weight:600}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+details{margin-top:26px;color:var(--mut)}summary{cursor:pointer}details ul{padding-left:18px}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){.meter i{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><span id="wk"></span><button id="inst">Instalar app</button></div>
+<div class="card" id="ih" hidden style="margin-top:10px"></div>
+
+<section class="hero">
+<div class="ar" id="ar"></div>
+<h1 id="tt"></h1>
+<p id="sm"></p>
+<div class="meter"><i id="pg"></i></div><div id="pt"></div>
+<div class="acts">
+<a class="btn" id="wi" target="_blank" rel="noopener">Leer en Wikipedia</a>
+<a class="btn" id="yt" target="_blank" rel="noopener">Ver videos</a>
+<button id="ot">Dame otro tema</button>
+</div>
+</section>
+
+<h2>Lo que debes saber</h2>
+<div id="cs"></div>
+
+<h2>Tu plan de la semana</h2>
+<ol id="pl"></ol>
+
+<h2>Ponte a prueba</h2>
+<div class="card">
+<div id="qq"></div><div id="qa" hidden></div>
+<div class="row"><button id="qr" hidden>Ver respuesta</button><button id="qb">Preguntarme</button></div>
+</div>
+
+<details><summary>Semanas anteriores</summary><ul id="hs"></ul></details>
+</main>
+
+<script>
+const T=`Estoicismo|Filosofía|Filosofía para vivir con calma y virtud frente a lo que no controlas.|Dicotomía del control: separa lo que depende de ti de lo que no.;Virtudes cardinales: sabiduría, justicia, coraje y templanza.;Figuras clave: Zenón, Séneca, Epicteto y Marco Aurelio.;Visualización negativa: imaginar la pérdida para valorar lo que tienes.;Práctica diaria: diario, repaso nocturno y actuar con razón.
+Evolución por selección natural|Biología|Las especies cambian porque ciertos rasgos heredables favorecen sobrevivir y reproducirse.|Variación: los individuos de una población no son idénticos.;Herencia: los rasgos se transmiten por los genes.;Selección natural: los mejor adaptados dejan más descendencia.;Evidencias: fósiles, ADN comparado y anatomía homóloga.;Especiación: el aislamiento acumula diferencias hasta formar especies nuevas.
+Inflación y dinero|Economía|Por qué suben los precios y qué hacen los bancos centrales.|Inflación: alza general y sostenida de los precios.;Causas: demanda alta, costos más caros o exceso de dinero.;Tasa de interés: herramienta del banco central para frenarla.;Poder adquisitivo: con el mismo dinero compras menos.;Protegerse: invertir, no dejar efectivo ocioso y subir ingresos.
+Agujeros negros|Astronomía|Regiones donde la gravedad es tan fuerte que ni la luz escapa.|Horizonte de sucesos: la frontera sin retorno.;Formación: colapso de estrellas muy masivas.;Relatividad general: la masa curva el espacio-tiempo.;Tipos: estelares, supermasivos y de masa intermedia.;Radiación de Hawking: pueden evaporarse muy lentamente.
+Revolución Industrial|Historia|El paso de lo artesanal a fábricas y máquinas desde el siglo XVIII.|Origen: Gran Bretaña, alrededor de 1760.;Máquina de vapor: energía del carbón para fábricas y trenes.;Urbanización: la gente migró del campo a las ciudades.;Clase obrera: surgen sindicatos y leyes laborales.;Consecuencias: crecimiento económico y contaminación.
+Sesgos cognitivos|Psicología|Atajos mentales que nos hacen equivocarnos de forma predecible.|Sesgo de confirmación: buscamos lo que apoya lo que ya creemos.;Anclaje: el primer dato pesa de más en una decisión.;Disponibilidad: juzgamos probable lo que recordamos fácil.;Costo hundido: seguimos por lo ya invertido.;Sistema 1 y 2: pensar rápido e intuitivo o lento y analítico.
+Probabilidad y estadística|Matemáticas|Herramientas para razonar con incertidumbre y datos.|Probabilidad: número de 0 a 1 que mide qué tan posible es un evento.;Media, mediana y moda: tres formas de resumir datos.;Desviación estándar: cuánto se dispersan los datos.;Correlación no es causalidad: variar juntos no prueba que uno cause al otro.;Teorema de Bayes: actualiza una creencia con nueva evidencia.
+Cómo funciona internet|Tecnología|La red de redes que conecta dispositivos con reglas comunes.|Direcciones IP: identifican a cada dispositivo en la red.;DNS: traduce nombres como google.com a direcciones IP.;Protocolos: TCP/IP y HTTP definen cómo viajan los datos.;Paquetes: la información se divide y se reensambla al llegar.;Cliente y servidor: tu navegador pide y el servidor responde.
+Mitología griega|Cultura|Relatos de dioses y héroes que moldearon la cultura occidental.|Doce olímpicos: Zeus, Hera, Poseidón, Atenea y los demás.;Orígenes: Caos, Gea, los titanes y su guerra con los dioses.;Héroes: Heracles, Perseo, Odiseo y Aquiles.;Inframundo: el reino de Hades y el río Estigia.;Legado: arte, idiomas y nombres de constelaciones.
+Cambio climático|Ciencias de la Tierra|Aumento de la temperatura global por gases de efecto invernadero.|Efecto invernadero: ciertos gases atrapan calor en la atmósfera.;Gases clave: dióxido de carbono y metano.;Causas humanas: combustibles fósiles, deforestación y ganadería.;Consecuencias: sube el nivel del mar y el clima es más extremo.;Respuestas: mitigación (bajar emisiones) y adaptación.
+Sistema inmune|Salud|Las defensas del cuerpo contra virus, bacterias y otras amenazas.|Inmunidad innata: barreras y respuesta rápida e inespecífica.;Inmunidad adaptativa: linfocitos que aprenden a reconocer amenazas.;Anticuerpos: proteínas que marcan al invasor.;Vacunas: entrenan la memoria inmune sin enfermarte.;Fallos: alergias y enfermedades autoinmunes.
+Imperio romano|Historia|De ciudad-estado a imperio que dominó el Mediterráneo.|República a Imperio: Augusto es el primer emperador, en el 27 a. C.;Legiones: ejército profesional y disciplinado.;Derecho romano: base de muchos sistemas legales actuales.;Pax Romana: dos siglos de relativa estabilidad.;Caída: Occidente cae en 476 d. C.; Oriente sigue como Imperio bizantino.
+Inteligencia artificial|Tecnología|Sistemas que aprenden patrones en datos para realizar tareas.|Aprendizaje automático: el modelo aprende de ejemplos, no de reglas escritas.;Redes neuronales: capas de nodos que ajustan sus pesos al entrenar.;Datos de entrenamiento: su calidad y sesgos definen el resultado.;Modelos de lenguaje: predicen texto a partir de muchísimo texto previo.;Límites: errores, sesgos y privacidad.
+Finanzas personales|Economía|Cómo ganar, gastar, ahorrar e invertir con criterio.|Presupuesto: saber a dónde va cada peso.;Fondo de emergencia: de 3 a 6 meses de gastos.;Interés compuesto: tus ganancias generan más ganancias.;Deuda: evita las de interés alto.;Diversificar: no pongas todo en un solo activo.
+Mecánica cuántica|Física|Reglas que gobiernan lo muy pequeño: átomos y partículas.|Cuantización: la energía viene en paquetes.;Dualidad onda-partícula: luz y materia muestran ambas caras.;Incertidumbre: no se conocen posición y velocidad exactas a la vez.;Superposición: varios estados posibles hasta que se mide.;Entrelazamiento: partículas ligadas con estados correlacionados.
+Pensamiento crítico|Ciencia|Cómo evaluar afirmaciones usando evidencia y lógica.|Método científico: observar, plantear hipótesis, probar y revisar.;Falsabilidad: una buena hipótesis puede demostrarse falsa.;Falacias: ataque personal, hombre de paja y falsa dicotomía.;Fuentes: quién lo dice, con qué datos y con qué interés.;Navaja de Ockham: entre explicaciones iguales, prefiere la más simple.
+Formas de gobierno|Política|Cómo se organiza y se reparte el poder en un país.|Democracia: el poder proviene del voto de la ciudadanía.;Monarquía y república: jefe de Estado hereditario o elegido.;Separación de poderes: ejecutivo, legislativo y judicial.;Autoritarismo: poder concentrado con pocos controles.;Federalismo: poder dividido entre gobierno central y estados.
+Genética y ADN|Biología|El código que guarda y transmite la información de los seres vivos.|ADN: doble hélice con las bases A, T, C y G.;Gen: tramo de ADN que codifica una proteína.;Cromosomas: los humanos tenemos 46, en 23 pares.;Mutaciones: cambios en el ADN, algunos útiles y otros dañinos.;Herencia de Mendel: alelos dominantes y recesivos.
+Culturas mesoamericanas|Historia|Civilizaciones de México y Centroamérica antes de la conquista.|Olmecas: cultura madre, famosa por sus cabezas colosales.;Mayas: escritura, astronomía y calendario.;Teotihuacan: gran ciudad de las pirámides del Sol y la Luna.;Mexicas: fundan Tenochtitlan hacia 1325.;Maíz: base de la alimentación y de la religión.
+Teoría de juegos|Matemáticas|Cómo se decide cuando mi resultado depende de lo que hagan otros.|Juego: jugadores, estrategias y recompensas.;Equilibrio de Nash: nadie mejora cambiando solo su estrategia.;Dilema del prisionero: cooperar conviene, pero traicionar tienta.;Suma cero: lo que gana uno lo pierde otro.;Juegos repetidos: la reputación hace posible cooperar.`
+.split("\n").map(l=>{const[n,a,s,c]=l.split("|");return{n,a,s,c:c.split(";").map(x=>{const k=x.indexOf(":");return[x.slice(0,k).trim(),x.slice(k+1).trim()]})}});
+const N=T.length,$=id=>document.getElementById(id);
+const d0=new Date(),W=Math.floor((Date.UTC(d0.getFullYear(),d0.getMonth(),d0.getDate())-Date.UTC(2024,0,1))/6048e5);
+let S={seed:0,start:null,done:{},ov:null},has=false,cur=0,qj=-1;
+try{const j=localStorage.getItem("tw");if(j)S=Object.assign(S,JSON.parse(j));has=true}catch(e){}
+if(!S.seed)S.seed=has?1+Math.floor(Math.random()*1e9):2024;
+if(S.start==null)S.start=W;
+const save=()=>{try{localStorage.setItem("tw",JSON.stringify(S))}catch(e){}};save();
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function topicAt(w){const r=rng(S.seed+Math.floor(w/N)*7919),o=[...Array(N).keys()];
+ for(let i=N-1;i>0;i--){const j=Math.floor(r()*(i+1));[o[i],o[j]]=[o[j],o[i]]}return o[w%N]}
+function wr(w){const a=Date.UTC(2024,0,1)+w*6048e5,f=x=>new Date(x).toLocaleDateString("es-MX",{day:"numeric",month:"long",timeZone:"UTC"});return f(a)+" al "+f(a+6*864e5)}
+function prog(){const d=(S.done[cur]||[]).length,n=T[cur].c.length;$("pg").style.width=100*d/n+"%";$("pt").textContent=`${d} de ${n} conceptos estudiados`+(d==n?". Tema completo.":"")}
+function show(i){cur=i;const t=T[i],c=t.c.map(x=>x[0]);
+ $("ar").textContent=t.a;$("tt").textContent=t.n;$("sm").textContent=t.s;
+ $("wi").href="https://es.wikipedia.org/w/index.php?search="+encodeURIComponent(t.n);
+ $("yt").href="https://www.youtube.com/results?search_query="+encodeURIComponent(t.n+" explicado");
+ $("cs").innerHTML=t.c.map(([a,b],j)=>`<label class="cc"><input type="checkbox" data-j="${j}" ${(S.done[i]||[]).includes(j)?"checked":""}><span><b>${a}</b><br>${b}</span></label>`).join("");
+ const P=[["Lunes","Panorama: lee el resumen y mira un video introductorio de 15 minutos."],["Martes","Estudia "+c[0]+" y "+c[1]+"."],["Miércoles","Estudia "+c[2]+" y "+c[3]+"."],["Jueves","Estudia "+c[4]+" y conéctalo con lo anterior."],["Viernes","Explica el tema por escrito en una página, sin mirar nada."],["Sábado","Ponte a prueba abajo y anota lo que olvidaste."],["Domingo","Repasa lo olvidado y elige un subtema para profundizar."]];
+ $("pl").innerHTML=P.map(p=>`<li><b>${p[0]}</b>${p[1]}</li>`).join("");
+ $("qq").textContent="Toca el botón y te pregunto un concepto.";$("qa").hidden=true;$("qr").hidden=true;$("qb").textContent="Preguntarme";qj=-1;prog()}
+function go(i){show(i);if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;let k=0;
+ const iv=setInterval(()=>{if(++k>14){clearInterval(iv);$("tt").textContent=T[i].n}else $("tt").textContent=T[Math.floor(Math.random()*N)].n},70)}
+$("cs").onchange=e=>{const j=+e.target.dataset.j,d=new Set(S.done[cur]||[]);e.target.checked?d.add(j):d.delete(j);S.done[cur]=[...d];save();prog()};
+$("ot").onclick=()=>{let i;do{i=Math.floor(Math.random()*N)}while(i==cur);S.ov={w:W,i};save();go(i)};
+$("qb").onclick=()=>{const c=T[cur].c;let j;do{j=Math.floor(Math.random()*c.length)}while(j==qj);qj=j;
+ $("qq").textContent="Explica con tus palabras: "+c[j][0];$("qa").textContent=c[j][1];$("qa").hidden=true;$("qr").hidden=false;$("qb").textContent="Otra pregunta"};
+$("qr").onclick=()=>{$("qa").hidden=false};
+$("wk").textContent="Semana del "+wr(W);
+let h="";for(let w=W-1;w>=Math.max(S.start,W-30);w--){const i=topicAt(w);h+=`<li>${wr(w)}: <b>${T[i].n}</b> (${(S.done[i]||[]).length}/5)</li>`}
+$("hs").innerHTML=h||"<li>Todavía no hay semanas anteriores.</li>";
+go(S.ov&&S.ov.w==W?S.ov.i:topicAt(W));
+
+/* Instalar como app (PWA) */
+let dp=null;
+try{if("serviceWorker" in navigator&&location.protocol.startsWith("http"))navigator.serviceWorker.register("sw.js").catch(()=>{})}catch(e){}
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;$("inst").textContent="Instalar app"});
+setTimeout(()=>{if(!dp)$("inst").textContent="Cómo instalar"},3000);
+addEventListener("appinstalled",()=>{$("inst").hidden=true;$("ih").hidden=true});
+if(matchMedia("(display-mode: standalone)").matches||navigator.standalone)$("inst").hidden=true;
+$("inst").onclick=async()=>{
+ if(dp){dp.prompt();const r=await dp.userChoice;dp=null;if(r.outcome=="accepted")$("inst").hidden=true;return}
+ if(!$("ih").hidden){$("ih").hidden=true;return}
+ $("ih").hidden=false;
+ if(/iphone|ipad|ipod/i.test(navigator.userAgent)){$("ih").innerHTML="En iPhone o iPad: toca <b>Compartir</b> y luego <b>Agregar a pantalla de inicio</b>.";return}
+ $("ih").textContent="Revisando…";const p=[];
+ if(location.protocol!="https:"&&location.hostname!="localhost")p.push("La página debe abrirse con https://. Ahora está en "+location.protocol);
+ if(top!==self)p.push("La página está dentro de otra (iframe). Ábrela directamente, no incrustada.");
+ try{const l=document.querySelector("link[rel=manifest]"),r=await fetch(l.href);if(!r.ok)throw 0;const m=await r.json();
+  for(const i of m.icons||[]){const x=await fetch(new URL(i.src,l.href));if(!x.ok)p.push("Falta el archivo "+i.src+" en el sitio.")}}
+ catch(e){p.push("No se pudo cargar manifest.json. Súbelo a la misma carpeta que index.html.")}
+ try{const g=await navigator.serviceWorker.getRegistration();if(!g)p.push("El service worker (sw.js) no está activo. Súbelo a la misma carpeta y recarga la página.")}
+ catch(e){p.push("Este navegador no permite service workers aquí.")}
+ $("ih").innerHTML=p.length?"<b>Qué falta para poder instalar:</b><br>"+p.join("<br>"):"Todo está bien. Recarga la página una vez y abre el menú del navegador: debe aparecer <b>Instalar app</b> (en computadora, también un icono en la barra de direcciones)."};
+</script>
+</body>
+</html>
